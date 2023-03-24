@@ -94,11 +94,35 @@ function numberToBinary(dec) {
  */
 
 /**
+ * The function cyclicRotation takes in two parameters, integersArray and rotations. integersArray is an optional parameter initialized 
+ * as an empty array, which represents the array of integers the function is supposed to manipulate. rotations is also an optional 
+ * parameter initialized as 0, which represents the number of rotations that should be carried out on the integersArray. 
  * 
- * @param {*} array 
+ * The function logs the original integersArray to the console. Then it checks whether rotations is a number and an integer, and whether 
+ * it is neither undefined nor zero; if not, the function returns false to indicate an error. It then checks whether integersArray is defined 
+ * and not empty; if not, the function returns false again. If both parameters are defined correctly, the function executes a for loop 
+ * that carries out as many rotations as indicated by rotations. Each iteration of the loop removes the last element of the integersArray 
+ * using pop(), and adds it to the beginning of the array using unshift(). This effectively rotates the array to the right by one element 
+ * in each iteration. Finally, the function logs the new rotated integersArray to the console and returns it.
+
+ * @param {*} integersArray 
  * @param {*} rotations 
  */
-function cyclicRotation(array = [], rotations = 0) {
-  
+function cyclicRotation(integersArray = [], rotations = 0) {
+  if (isNaN(rotations) || !Number.isInteger(rotations)) { return []; }
+
+  if (!rotations || rotations === 0) { return []; }
+
+  if (!integersArray || Number.isInteger(integersArray)) { return []; }
+
+  if (!integersArray.length || integersArray.length === 0) { return []; }
+
+  for (let i = 1; i <= rotations; i++) {
+    integersArray.unshift(integersArray.pop())
+  }
+  console.log(integersArray);
+
+  return integersArray;
 }
-// console.log("Max binary gap is: ", binaryGap(51712));
+console.log(cyclicRotation([-4, 6, 0, 0, 0, -2, 10], 15));
+// console.log("Function: ", cyclicRotation([1, 3, 4], 2));
